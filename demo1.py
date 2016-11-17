@@ -2,7 +2,7 @@
 """
 Created on Mon Nov 14 20:15:53 2016
 
-@author: 131
+@author: larry
 """
 import tushare as ts
 import pandas as pd
@@ -42,7 +42,6 @@ class MATrade(object):
         capital['hold']=self.gen_position()*self.bar['close']#持仓
         capital['rest']=self.init_capital-(self.trade_positions()*bars['close']).cumsum()#用总资金减去每天的市值得出剩余资金
         capital['total']=capital['hold']+capital['rest']#总资产变化
-        capital['return']=capital['total'].pct_change().fillna(capital['total'][0]/self.init_capital-1)
         return capital
 if __name__=='__main__':
     bars=ts.get_hist_data('000001',start='2012-01-01',end='2015-01-01').sort_index()
